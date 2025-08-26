@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "proto/gen/go"; 
+
+// The Auth service definition.
+service AuthService {
+    // Sends a string value.
+    rpc SendUserLogData(UserLogDataRequest) returns (UserLogDataResponse);
+    rpc SaveUser(SaveUserRequest) returns (SaveUserResponse);
+    rpc User(UserRequest) returns (UserResponse);
+    rpc SaveEntry(EntryRequest) returns (EntryResponse);
+    rpc Auth(AuthRequest) returns (AuthResponse);
+    rpc GetEntry(GetEntryRequest) returns (GetEntryResponse);
+    rpc GetAllEntries(GetAllEntriesRequest) returns (stream EntryResponse);
+    rpc UpdateEntry(UpdateEntryRequest) returns (UpdateEntryResponse);
+    rpc DeleteEntry(DeleteEntryRequest) returns (DeleteEntryResponse);
+}
+
+// AUTH MODELS //
+message AuthRequest{
+    string token = 1;
+}
+
+message AuthResponse{
+    string status = 1;
+}
+// AUTH MODELS //
+
+// The request message containing the string to send. //
+message UserLogDataRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message UserLogDataResponse {
+    string token = 1;
+}
+// The request message containing the string to send. //
+
+// The request message for saving a user.
+message SaveUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message SaveUserResponse {
+    string message = 1;
+}
+
+// The request message for getting a user.
+message UserRequest{
+    string email = 1;
+}
+
+message UserResponse{
+    string response = 1;
+}
+
+// The request message for saving an entry.
+message EntryRequest {
+    uint64 userid = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message EntryResponse {
+    uint64 id = 1;
+    uint64 userid = 2;
+    string title = 3;
+    string content = 4;
+}
+
+// The request message for getting an entry.
+message GetEntryRequest {
+    uint64 id = 1;
+}
+
+message GetEntryResponse {
+    uint64 id = 1;
+    uint64 userid = 2;
+    string title = 3;
+    string content = 4;
+}
+
+// The request message for getting all entries.
+message GetAllEntriesRequest {
+    uint64 userid = 1;
+}
+
+// The request message for updating an entry.
+message UpdateEntryRequest {
+    uint64 id = 1;
+    uint64 userid = 2;
+    string title = 3;
+    string content = 4;
+}
+
+message UpdateEntryResponse {
+    uint64 id = 1;
+    uint64 userid = 2;
+    string title = 3;
+    string content = 4;
+}
+
+// The request message for deleting an entry.
+message DeleteEntryRequest {
+    uint64 id = 1;
+}
+
+message DeleteEntryResponse {
+    string message = 1;
+}
