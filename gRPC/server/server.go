@@ -268,7 +268,6 @@ func (s *server) GetAllEntries(req *auth.GetAllEntriesRequest, stream auth.AuthS
             return status.Errorf(codes.Internal, "Failed to stream entries: %v", err)
         }
     }
-
     return nil
 }
 

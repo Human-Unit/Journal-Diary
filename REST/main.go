@@ -29,7 +29,7 @@ func main() {
 	
 	entrie := router.Group("/entrie")
 
-	entrie.Use(auth.Auth())
+	entrie.Use(auth.Auth()) 
 	{
 	entrie.POST("/create", handlers.CreateEntrie)
 	entrie.GET("/get/:id", handlers.GetEntrie)
